@@ -7,7 +7,7 @@ def retrieve(fi='', listf={}):
         for _id,seq,qual in FastqGeneralIterator(open(fi)):
             header = _id.split(' ')[1]
             #print _id, header
-            read = '@%s\n+\n%s\n%s' %(_id, seq, qual)
+            read = '@%s\n%s\n+\n%s' %(_id, seq, qual)
 	    if(header[0]=='1'): fo1.write(read+"\n")
 	    if(header[0]=='2'): fo2.write(read+"\n")
 
