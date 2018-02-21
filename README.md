@@ -3,6 +3,7 @@ This repository contains a collection of commonly used wrappers/scripts/preproce
 
 ### Fasq to Fasta
 this simple script takes a fasta file as input and retorns a fasta file
+	
 	fq2fa.py input.fq{fastq}
 	
 ### Split Fastq
