@@ -14,6 +14,6 @@ this simple script splits fastq files that are stored in one single fastq file. 
 ## fasta to length
 This script calculates the length of each entry in a fasta file and store it as a text file
 
-	fasta2len.py input_file "..." > output file
+	fasta2len.py input_file "..." > output_file
 
 "..." is the separator of each entry name (if needed)
