@@ -17,3 +17,16 @@ This script calculates the length of each entry in a fasta file and store it as 
 	fasta2len.py input_file "..." > output_file
 
 "..." is the separator of each entry name (if needed)
+
+## get random sequences from fastq file
+This script takes a paired end library and subsample the sequences to a user defined number. Please make sure the seed parameter is the same for both paired-1 and paired-2, other case you will end up having different reads in each one of the subsampled files.
+
+### Requirements
+This script uses vsearch (https://github.com/torognes/vsearch). There is a local copy of vsearch in this repository, but only works in linux systems. To use it, you need to type:
+
+	chmod +x vsearch
+
+### Usage
+To use the randomfq.sh script, you need to be in the directory where the file was downloaded, then, you just need to type:
+
+	sh randomfq.sh fastq_file_1 fastq_file_2 number_of_reads seed
