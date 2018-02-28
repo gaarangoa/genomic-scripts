@@ -54,28 +54,28 @@ then we need to clone this repository
 I am assuming the directory root to be like this:
 
 	----| root
-		+--| rawreads
-			+--| sample_1
-		+--| genomic-scripts
+		+---| rawreads
+		+---+--| sample_1
+		+---| genomic-scripts
 
-### Remove chloroplast reads from sample and random subsample. 
+### Remove 16S rRNA chloroplast reads from sample and random subsample. 
 
 For this task we will use Chfilter, which assumes that you have already installed bowtie 2 in your machine, so it can be used by just typing bowtie2
 
 1. uncompress *.gz files
 
+		cd rawreads/sample_1/
 		gunzip sample_1.R1.fastq.gz
 		gunzip sample_2.R2.fastq.gz
 
 2. Run chfilter to remove chloroplasts
 
-		cd  rawreads/sample_1/
 		chfilter remove --paired-1 sample_1.R1.fastq --paired-2 sample_1.R2.fastq --out-dir .
 
-3. Subsample 12M reads from the sample without chloroplast 16S reads
+3. Subsample 12M reads from the sample without chloroplast 16S reads. If you subsample one library multiple times, make sure to change the random seed, othercase you will get the same result. In this example we set the random seed to 0. 
 
 		cd ../../genomic-scripts/
-		sh randomfq.sh sample_1.R1.no-chl.fastq sample_1.R2.no-chl.fastq 12000000 0
+		sh randomfq.sh sample_1.R1.no-chl.fastq sample_1.R2.no-chl.fastq 12700000 0
 
 4. Analyze results
 	Analysis can be done in MetaStorm (http://bench.cs.vt.edu/MetaStorm/)
