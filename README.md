@@ -53,10 +53,10 @@ then we need to clone this repository
 
 I am assuming the directory root to be like this:
 
-----| root
-	+--| rawreads
-	   +--| sample_1
-	+--| genomic-scripts
+	----| root
+		+--| rawreads
+		+--| sample_1
+		+--| genomic-scripts
 
 Remove chloroplast reads from sample. Chfilter assumes you have already installed bowtie 2 in your machine, so it can be used by just typing bowtie2
 
