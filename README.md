@@ -58,15 +58,17 @@ I am assuming the directory root to be like this:
 			+--| sample_1
 		+--| genomic-scripts
 
-Remove chloroplast reads from sample. Chfilter assumes you have already installed bowtie 2 in your machine, so it can be used by just typing bowtie2
+### Remove chloroplast reads from sample. 
+
+For this task we will use Chfilter, which assumes that you have already installed bowtie 2 in your machine, so it can be used by just typing bowtie2
 
 1. uncompress *.gz files
 
-	gunzip sample_1.R1.fastq.gz
-	gunzip sample_2.R2.fastq.gz
+		gunzip sample_1.R1.fastq.gz
+		gunzip sample_2.R2.fastq.gz
 
 2. Run chfilter to remove chloroplasts
 
-	cd  rawreads/sample_1/
-	chfilter remove --paired-1 sample_1.R1.fastq --paired-2 sample_1.R2.fastq --out-dir .
+		cd  rawreads/sample_1/
+		chfilter remove --paired-1 sample_1.R1.fastq --paired-2 sample_1.R2.fastq --out-dir .
 
