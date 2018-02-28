@@ -58,7 +58,7 @@ I am assuming the directory root to be like this:
 			+--| sample_1
 		+--| genomic-scripts
 
-### Remove chloroplast reads from sample. 
+### Remove chloroplast reads from sample and random subsample. 
 
 For this task we will use Chfilter, which assumes that you have already installed bowtie 2 in your machine, so it can be used by just typing bowtie2
 
@@ -71,4 +71,12 @@ For this task we will use Chfilter, which assumes that you have already installe
 
 		cd  rawreads/sample_1/
 		chfilter remove --paired-1 sample_1.R1.fastq --paired-2 sample_1.R2.fastq --out-dir .
+
+3. Subsample 12M reads from the sample without chloroplast 16S reads
+
+		cd ../../genomic-scripts/
+		sh randomfq.sh sample_1.R1.no-chl.fastq sample_1.R2.no-chl.fastq 12000000 0
+
+4. Analyze results
+	Analysis can be done in MetaStorm (http://bench.cs.vt.edu/MetaStorm/)
 
