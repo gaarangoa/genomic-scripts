@@ -8,6 +8,7 @@ indir = sys.argv[2]
 for sample,fastq1gz,fastq2gz in files:
     fastq1 = ".".join(fastq1gz.split('.')[:-1])
     fastq2 = ".".join(fastq2gz.split('.')[:-1])
+    
     print('uncompressing files')
     os.system('gunzip -c '+indir+"/"+fastq1gz+" > "+outdir+"/"+fastq1 )
     os.system('gunzip -c '+indir+"/"+fastq2gz+" > "+outdir+"/"+fastq2 )
@@ -18,5 +19,3 @@ for sample,fastq1gz,fastq2gz in files:
     print('removing temp files')
     os.system('rm '+outdir+"/"+fastq1+" "+outdir+"/"+fastq2+' '+outdir+"/bowtie*")
     print(':) done!')
-
-    
