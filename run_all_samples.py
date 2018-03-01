@@ -16,4 +16,4 @@ for sample,fastq1gz,fastq2gz in files:
 
     os.system('sh randomfq.sh '+outdir+'/'+fastq1+'.no-chl.fastq '+fastq2+'.no-chl.fastq 12700000 0')
 
-    os.system('rm '+outdir+"/"+fastq1+" "+outdir+"/"+fastq2+" bowtie*")
+    os.system('rm '+outdir+"/"+fastq1+" "+outdir+"/"+fastq2+' '+outdir+"/bowtie*")
