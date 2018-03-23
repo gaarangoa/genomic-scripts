@@ -6,10 +6,10 @@ from Bio import SeqIO
 '''
 
 fi=sys.argv[1] # fastafile from besthit
-finp = { i.split()[0]: True sys.argv[2] } # file with list of sequences to filter
+finp = { i.split()[0]: True for i in sys.argv[2] } # file with list of sequences to filter
 
 for record in SeqIO.parse(open(fi), "fasta"):
-    id = record.id.split(sep)[0]
+    id = record.id
 
     # if the length of the query is zero, close the program
     if not finp: close()
