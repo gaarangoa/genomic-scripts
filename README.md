@@ -2,6 +2,20 @@
 
 This repository contains a collection of commonly used wrappers/scripts/preprocessing scripts for the genomic/metagenomic analysis.
 
+## SETUP
+Download this repository and install it using pip3
+
+	git clone https://github.com/gaarangoa/genomic-scripts.git
+	cd genomic-scripts
+	pip3 install . --user
+
+Then type:
+
+	genetools --help
+
+To get instructions of the usage.
+
+
 ### Fasq to Fasta
 this simple script takes a fasta file as input and retorns a fasta file
 
