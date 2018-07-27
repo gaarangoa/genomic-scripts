@@ -56,7 +56,8 @@ def mismatch(sequence, positions):
 @click.option('--deletions', default=30, help='percentage of deletions out of the total mutations (default: 30%)')
 @click.option('--mismatches', default=40, help='percentage of mismatches out of the total mutations (default: 40%)')
 @click.option('--max-indel-size', default=5, help='maximum indel size (default: 5)')
-def mutate(input_file, insertions, deletions, mismatches, mutations, max_indel_size):
+@click.option('--prefix', default='0', help='prefix added to output file')
+def mutate(input_file, insertions, deletions, mismatches, mutations, max_indel_size, prefix):
 
     '''
         Mutate a nucleotide sequence:
@@ -70,7 +71,7 @@ def mutate(input_file, insertions, deletions, mismatches, mutations, max_indel_s
         os.system('genetools mutate --help')
         exit()
 
-    fo = open(input_file+'.M'+str(mutations)+'.m'+str(mismatches)+'.i'+str(insertions)+'.d'+str(deletions)+'.mut.fa', 'w')
+    fo = open(input_file+'.M'+str(mutations)+'.m'+str(mismatches)+'.i'+str(insertions)+'.d'+str(deletions)+'.prefix-'+prefix+'.mut.fa', 'w')
 
     # mutations are 2x
     mutations = int(mutations/2)
