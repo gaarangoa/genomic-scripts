@@ -15,7 +15,7 @@ Download this repository and install it using pip3
 
 
 
-### Fasq to Fasta
+<!-- ### Fasq to Fasta
 this simple script takes a fasta file as input and retorns a fasta file
 
 	fq2fa.py input.fq{fastq}
@@ -92,5 +92,5 @@ For this task we will use Chfilter, which assumes that you have already installe
 		sh randomfq.sh sample_1.R1.no-chl.fastq sample_1.R2.no-chl.fastq 12700000 0
 		gzip *.fq
 
-4. Analysis can be done in MetaStorm (http://bench.cs.vt.edu/MetaStorm/)
+4. Analysis can be done in MetaStorm (http://bench.cs.vt.edu/MetaStorm/) -->
 
