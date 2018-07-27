@@ -9,11 +9,10 @@ Download this repository and install it using pip3
 	cd genomic-scripts
 	pip3 install . --user
 
-Then type:
+## USAGE
 
 	genetools --help
 
-To get instructions of the usage.
 
 
 ### Fasq to Fasta
