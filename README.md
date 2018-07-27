@@ -1,11 +1,12 @@
-## USEFUL SCRIPTS
+## GENETOOLS
+
 This repository contains a collection of commonly used wrappers/scripts/preprocessing scripts for the genomic/metagenomic analysis.
 
 ### Fasq to Fasta
 this simple script takes a fasta file as input and retorns a fasta file
-	
+
 	fq2fa.py input.fq{fastq}
-	
+
 ### Split Fastq
 this simple script splits fastq files that are stored in one single fastq file. It looks at the prefix (you need to define where the 1/2 field) and store them into different files
 
@@ -35,14 +36,14 @@ To use the randomfq.sh script, you need to be in the directory where the file wa
 # Use Cases
 ## Remove chloroplast reads
 
-In this use case we will remove the chloroplasts from a sample and then subsample the library to 12M reads. 
+In this use case we will remove the chloroplasts from a sample and then subsample the library to 12M reads.
 
-First we need to create a virtual environment where we can download our software: 
+First we need to create a virtual environment where we can download our software:
 
 	virtualenv env
 	source ./env/bin/activate
 
-now we need to install the software to remove the chloroplasts from the library, we will use chfilter. 
+now we need to install the software to remove the chloroplasts from the library, we will use chfilter.
 
 	pip install pip --upgrade
 	pip install chfilter
@@ -58,7 +59,7 @@ I am assuming the directory root to be like this:
 		+---+--| sample_1
 		+---| genomic-scripts
 
-### Remove 16S rRNA chloroplast reads from sample and random subsample. 
+### Remove 16S rRNA chloroplast reads from sample and random subsample.
 
 For this task we will use Chfilter, which assumes that you have already installed bowtie 2 in your machine, so it can be used by just typing bowtie2
 
@@ -72,7 +73,7 @@ For this task we will use Chfilter, which assumes that you have already installe
 
 		chfilter remove --paired-1 sample_1.R1.fastq --paired-2 sample_1.R2.fastq --out-dir .
 
-3. Subsample 12M reads from the sample without chloroplast 16S reads. If you subsample one library multiple times, make sure to change the random seed, othercase you will get the same result. In this example we set the random seed to 0. 
+3. Subsample 12M reads from the sample without chloroplast 16S reads. If you subsample one library multiple times, make sure to change the random seed, othercase you will get the same result. In this example we set the random seed to 0.
 
 		cd ../../genomic-scripts/
 		sh randomfq.sh sample_1.R1.no-chl.fastq sample_1.R2.no-chl.fastq 12700000 0
