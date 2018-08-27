@@ -46,8 +46,11 @@ def filter_taxa(input_file, taxa, update_taxa_db, read_pos, taxa_pos, sep):
 
         # get lineage of the taxa id
         lineage = ncbi.get_lineage(int(taxa_id))
-        if int(taxa) in lineage:
-            fo.write("\t".join([read_id, taxa_id]) + "\n")
+        try:
+            if int(taxa) in lineage:
+                fo.write("\t".join([read_id, taxa_id]) + "\n")
+        except Exception as inst:
+            log.error(str(inst))
 
     fo.close()
 
