@@ -8,6 +8,7 @@ setup(
     install_requires=[
         'Click',
         'BioPython',
+        'ete3',
         'h5py',
         'tqdm'
     ],
