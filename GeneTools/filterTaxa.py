@@ -50,7 +50,7 @@ def filter_taxa(input_file, taxa, update_taxa_db, read_pos, taxa_pos, sep):
             if int(taxa) in lineage:
                 fo.write("\t".join([read_id, taxa_id]) + "\n")
         except Exception as inst:
-            log.error(str(inst))
+            log.error(str(inst)+' '+read_id)
 
     fo.close()
 
