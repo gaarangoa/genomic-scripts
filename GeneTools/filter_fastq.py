@@ -6,10 +6,10 @@ import gzip
 @click.command()
 @click.option('--qfile', required=True, help='Filter all sequences that contain this taxa id (look at all levels)')
 @click.option('--qfilter', required=True, help='input tabular file with sequence ids. File must be a gz compressed file')
-@click.option('--out-file', required=True, help='Save fastq file to this filename')
+@click.option('--outfile', required=True, help='Save fastq file to this filename')
 @click.option('--qcolumn', default=0, help='Column where the sequences ids (default: 1)')
 
-def filter_fastq(qfilter, qcolumn, qfile):
+def filter_fastq(qfilter, qcolumn, qfile, outfile):
     '''
     Subtract fastq reads from a list of entries.
 
@@ -28,7 +28,7 @@ def filter_fastq(qfilter, qcolumn, qfile):
     _index = {i.split()[qcolumn]: True for i in open(qfilter)}
 
     log.info('Traverse fastq file to filter sequences of interest')
-    fo = open(out_file, 'w')
+    fo = open(outfile, 'w')
     with gzip.open(qfile, 'rt') as handle:
         for record in SeqIO.parse(handle, "fastq"):
             try:
