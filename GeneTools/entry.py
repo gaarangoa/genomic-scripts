@@ -4,6 +4,7 @@ from GeneTools.patric.patric import patric
 from GeneTools.fasta2rand import fasta2rand
 from GeneTools.FilterFastaLength import FilterFastaLength
 from GeneTools.filterTaxa import filter_taxa
+from GeneTools.filter_fastq import filter_fastq
 
 @click.group()
 def cli():
@@ -22,3 +23,4 @@ cli.add_command(patric)
 cli.add_command(fasta2rand)
 cli.add_command(FilterFastaLength)
 cli.add_command(filter_taxa)
+cli.add_command(filter_fastq)
