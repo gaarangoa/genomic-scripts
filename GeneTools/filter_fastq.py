@@ -28,7 +28,7 @@ def filter_fastq(qfilter, qcolumn, qfile, outfile):
     _index = {i.split()[qcolumn]: True for i in open(qfilter)}
 
     log.info('Traverse fastq file to filter sequences of interest')
-    fo = open(outfile, 'w')
+    fo = gzip.open(outfile, 'w')
     with gzip.open(qfile, 'rt') as handle:
         for record in SeqIO.parse(handle, "fastq"):
             try:
