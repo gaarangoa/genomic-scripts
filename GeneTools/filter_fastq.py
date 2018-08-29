@@ -37,5 +37,6 @@ def filter_fastq(qfilter, qcolumn, qfile, outfile):
             except Exception as e:
                 pass
 
+    fo.close()
 
 
