@@ -28,12 +28,12 @@ def filter_fastq(qfilter, qcolumn, qfile, outfile):
     _index = {i.split()[qcolumn]: True for i in open(qfilter)}
 
     log.info('Traverse fastq file to filter sequences of interest')
-    fo = gzip.open(outfile, 'w')
+    fo = gzip.open(outfile, 'wb')
     with gzip.open(qfile, 'rt') as handle:
         for record in SeqIO.parse(handle, "fastq"):
             try:
                 assert (_index[record.id])
-                fo.write(record.format("fastq"))
+                fo.write(record.format("fastq").encode())
             except Exception as e:
                 pass
 
