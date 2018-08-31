@@ -51,16 +51,16 @@ def taxa_file_to_table(taxa_file, sample_names, taxa_column, output_file):
             names = ncbi.get_taxid_translator(lineage)
             ranks = ncbi.get_rank(lineage)
 
-            taxa_info = [ ranks[taxid][0]+'__'+names[taxid] for taxid in lineage]
+            taxa_info = [ ranks[taxid][0]+'__'+names[taxid] for taxid in lineage if ranks[taxid] in ['genus', 'family', 'phylum', 'class', 'order']]
 
-            taxa_dict[taxa_id]['lineage'] = ";".join(taxa_info)
+            taxa_dict[taxa_id]['lineage'] = "r__Root;"+";".join(taxa_info)
 
             taxa_dict[taxa_id][sample_name] += 1
 
 
     _table = pd.DataFrame.from_dict(taxa_dict).transpose()
 
-    _table.index.name = 'out_id'
+    _table.index.name = 'otu_id'
     log.debug(_table)
 
     _table.to_csv(output_file, sep="\t")
