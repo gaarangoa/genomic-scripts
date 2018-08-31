@@ -49,8 +49,12 @@ def taxa_file_to_table(taxa_file, sample_names, taxa_column, output_file):
 
             lineage = ncbi.get_lineage(int(taxa_id))
             names = ncbi.get_taxid_translator(lineage)
+            ranks = ncbi.get_rank(lineage)
 
-            taxa_dict[taxa_id]['lineage'] = ";".join( [names[taxid] for taxid in lineage] )
+            taxa_info = [ ranks[taxid][0]+'__'+names[taxid] for taxid in lineage]
+
+            taxa_dict[taxa_id]['lineage'] = ";".join(taxa_info)
+
             taxa_dict[taxa_id][sample_name] += 1
 
 
