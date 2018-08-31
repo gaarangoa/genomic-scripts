@@ -13,9 +13,9 @@ import pandas as pd
 
 def taxa_file_to_table(taxa_file, sample_names, taxa_column, output_file):
     '''
-    Subtract fastq reads from a list of entries.
+    Convert files with taxonomy NCBI id to a matrix of counts.
 
-    This scrip picks up sequences in qfilter (fastq file) from qfile (tabular file where first column corresponds to read id).
+    Tested on centrifuge output
 
     '''
 
