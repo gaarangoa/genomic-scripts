@@ -41,11 +41,11 @@ def taxa_file_to_table(taxa_file, sample_names, taxa_column, output_file):
     taxa_dict = {}
     for taxa_file, sample_name in metadata:
         for item in open(taxa_file):
-            taxa_id = item.split()[taxa_column]
+            taxa_id = item.strip().split('\t')[taxa_column]
             try:
                 assert(int(taxa_id))
             except Exception as e:
-                log.info('File has header: '+item)
+                log.info('File has header: '+item.strip())
                 continue
 
             try:
