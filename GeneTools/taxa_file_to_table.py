@@ -43,9 +43,9 @@ def taxa_file_to_table(taxa_file, sample_names, taxa_column, output_file):
         for item in open(taxa_file):
             taxa_id = item.split()[taxa_column]
             try:
-                assert(taxa_dict[taxa_id])
+                assert(taxa_dict["TaxaID_"+str(taxa_id)])
             except Exception as e:
-                taxa_dict[taxa_id] = {i: 0 for i in samples}
+                taxa_dict["TaxaID_"+str(taxa_id)] = {i: 0 for i in samples}
 
             lineage = ncbi.get_lineage(int(taxa_id))
             names = ncbi.get_taxid_translator(lineage)
@@ -53,9 +53,9 @@ def taxa_file_to_table(taxa_file, sample_names, taxa_column, output_file):
 
             taxa_info = [ ranks[taxid][0]+'__'+names[taxid] for taxid in lineage if ranks[taxid] in ['genus', 'family', 'phylum', 'class', 'order']]
 
-            taxa_dict[taxa_id]['lineage'] = "r__Root;"+";".join(taxa_info)
+            taxa_dict["TaxaID_"+str(taxa_id)]['lineage'] = "r__Root;"+";".join(taxa_info)
 
-            taxa_dict[taxa_id][sample_name] += 1
+            taxa_dict["TaxaID_"+str(taxa_id)][sample_name] += 1
 
 
     _table = pd.DataFrame.from_dict(taxa_dict).transpose()
