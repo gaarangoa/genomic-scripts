@@ -43,6 +43,12 @@ def taxa_file_to_table(taxa_file, sample_names, taxa_column, output_file):
         for item in open(taxa_file):
             taxa_id = item.split()[taxa_column]
             try:
+                assert(int(taxa_id))
+            except Exception as e:
+                log.info('File has header: '+item)
+                continue
+
+            try:
                 assert(taxa_dict["TaxaID_"+str(taxa_id)])
             except Exception as e:
                 taxa_dict["TaxaID_"+str(taxa_id)] = {i: 0 for i in samples}
