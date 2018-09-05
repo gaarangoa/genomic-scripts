@@ -4,8 +4,8 @@ import logging
 import gzip
 
 @click.command()
-@click.option('--qfile', required=True, help='Filter all sequences that contain this taxa id (look at all levels)')
-@click.option('--qfilter', required=True, help='input tabular file with sequence ids. File must be a gz compressed file')
+@click.option('--qfile', required=True, help='fastq file')
+@click.option('--qfilter', required=True, help='input tabular file with sequence ids')
 @click.option('--outfile', required=True, help='Save fastq file to this filename')
 @click.option('--qcolumn', default=0, help='Column where the sequences ids (default: 1)')
 
