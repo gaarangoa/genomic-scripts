@@ -7,6 +7,8 @@ from GeneTools.filterTaxa import filter_taxa
 from GeneTools.filter_fastq import filter_fastq
 from GeneTools.taxa_file_to_table import taxa_file_to_table
 from GeneTools.deeparg_table import deeparg_table
+from GeneTools.deeparg_abundance import deeparg_abundance
+from GeneTools.filterfasta import filterfasta
 
 @click.group()
 def cli():
@@ -28,3 +30,5 @@ cli.add_command(filter_taxa)
 cli.add_command(filter_fastq)
 cli.add_command(taxa_file_to_table)
 cli.add_command(deeparg_table)
+cli.add_command(deeparg_abundance)
+cli.add_command(filterfasta)
