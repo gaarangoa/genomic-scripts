@@ -8,10 +8,10 @@ from GeneTools.filter_fastq import filter_fastq
 from GeneTools.taxa_file_to_table import taxa_file_to_table
 from GeneTools.deeparg_table import deeparg_table
 from GeneTools.deeparg_abundance import deeparg_abundance
-from GeneTools.filterfasta import filterfasta
+from GeneTools.fasta_subset import fasta_subset
 from GeneTools.split_fasta import split_fasta
 from GeneTools.fasta2kmers import fasta2kmers
-
+from GeneTools.fasta_filter_seq import fasta_filter_seq
 
 
 @click.group()
@@ -35,6 +35,7 @@ cli.add_command(filter_fastq)
 cli.add_command(taxa_file_to_table)
 cli.add_command(deeparg_table)
 cli.add_command(deeparg_abundance)
-cli.add_command(filterfasta)
+cli.add_command(fasta_subset)
 cli.add_command(split_fasta)
 cli.add_command(fasta2kmers)
+cli.add_command(fasta_filter_seq)

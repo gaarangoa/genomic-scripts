@@ -8,13 +8,10 @@ import json
 @click.command()
 @click.option('--fasta', required=True, help='fasta input file')
 @click.option('--entries', required=True, help='tabular file with entries')
-def filterfasta(fasta, entries):
+def fasta_filter_seq(fasta, entries):
     '''
 
-    Filter sequences from fasta file
-
-    This script hashes the --entries and traverses the --fasta file until all entries are found.
-    The running time depends on the length of the file
+    Remove the sequences in --entries from --fasta
 
     '''
 
@@ -26,11 +23,9 @@ def filterfasta(fasta, entries):
         _id = record.id
         if not finp: exit()
         try:
-            finp[_id.replace('_template','')]
-            print(">"+_id+"\n"+str(record.seq))
-            finp[_id.replace('_template','')]
+            # is the sequence in the hash table?
+            assert(finp[_id.replace('_template','')])
         except Exception as e:
-            pass
-        # total_entries -= 1
+            print(">"+_id+"\n"+str(record.seq))
 
 
