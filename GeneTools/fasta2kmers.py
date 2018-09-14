@@ -7,8 +7,10 @@ import json
 import re
 import numpy as np
 
+
 def split_genome(genome="ATCGATATACCA", k=3):
     return re.findall('.'*k, genome)
+
 
 def genearte_one_genome(genome='ATCGATATACCA', k=3):
 
@@ -16,6 +18,7 @@ def genearte_one_genome(genome='ATCGATATACCA', k=3):
     _sentence = split_genome(genome=_genome, k=k)
 
     return _sentence
+
 
 @click.command()
 @click.option('--fasta-file', required=True, help='fasta input file')
@@ -36,4 +39,4 @@ def fasta2kmers(fasta_file, kmer, out_file):
         _genome = str(record.seq).upper()
         sentences = genearte_one_genome(genome=_genome, k=kmer)
         fo.write(" ".join(sentences) + '\n')
-        fo2.write(record.description + "\t"+ str(len(sentences)) + '\n')
+        fo2.write(record.description + "\t" + str(len(sentences)) + '\n')

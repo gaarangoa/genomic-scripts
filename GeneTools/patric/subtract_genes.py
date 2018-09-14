@@ -58,6 +58,7 @@ def subtract_genes(input_directory, genome_id, output_file, property, extend, fa
 
     log.info(('metdata file', input_directory + '/' + genome_id +
               '/' + genome_id + '.PATRIC.spgene.tab'))
+
     for ix, i in enumerate(metadata_file):
 
         # identify keys
@@ -71,6 +72,7 @@ def subtract_genes(input_directory, genome_id, output_file, property, extend, fa
         if property in item['property']:
             metadata.update({item['patric_id']: item})
 
+    log.debug(metadata)
     log.info(('loading features file', input_directory + '/' +
               genome_id + '/' + genome_id + '.PATRIC.features.tab'))
 
@@ -143,4 +145,30 @@ def subtract_genes(input_directory, genome_id, output_file, property, extend, fa
         fofasta = open(output_file + '.fasta', 'w')
         genome_data = genomes
         for record in SeqIO.parse(open(input_directory + '/' + genome_id + '/' + genome_id + '.PATRIC.faa'), "fasta"):
-            pass
+            # check in metadata, the metadata dict has the keys as the patric ids
+            protein_id = "|".join(record.id.split("|")[:2])
+            try:
+                assert (metadata[protein_id])
+                log.debug(record)
+                log.debug(metadata[protein_id])
+                # fortmat of output fasta file
+                # id|category|gene_name|gene_group
+                _id = protein_id.replace('|', ":")
+                _category = metadata[protein_id]['property']
+                _gene_name = metadata[protein_id]['gene']
+                _gene_group = metadata[protein_id]['gene']
+
+                if not _gene_name:
+                    _gene_name = 'other'
+                    _gene_group = 'other'
+
+                header = "|".join(
+                    [_id, _category, _gene_name, _gene_group]).replace(" ", "_")
+                sequence = str(record.seq)
+
+                if len(sequence) < 200:
+                    continue
+
+                fofasta.write(header+'\n'+sequence+'\n')
+            except:
+                pass
