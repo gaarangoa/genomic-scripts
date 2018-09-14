@@ -1,6 +1,7 @@
 import click
 from Bio import SeqIO
 import json
+import logging
 
 
 def overlap(intervals):
@@ -33,7 +34,8 @@ def overlap(intervals):
 @click.option('--output-file', default='', help='File where to store the fasta format with the requested genes')
 @click.option('--property', default='Essential Gene', help='Select genes under this property (e.g., Essential Gene)')
 @click.option('--extend', default=0, help='Add at the end of each gene # of nucleoties (default: 0)')
-def subtract_genes(input_directory, genome_id, output_file, property, extend):
+@click.option('--faa', default=False, is_flag=True, help='retrieve protein sequences')
+def subtract_genes(input_directory, genome_id, output_file, property, extend, faa):
     '''
         Retrieve genes based on origin
 
@@ -42,9 +44,20 @@ def subtract_genes(input_directory, genome_id, output_file, property, extend):
         Antibiotic Resistance, Drug Target, Essential Gene, Human Homolog, Transporter, Virulence Factor.
     '''
 
+    logging.basicConfig(
+        filename=output_file + '.log',
+        level=logging.DEBUG,
+        filemode="w",
+        format="%(levelname)s %(asctime)s - %(message)s"
+    )
+    log = logging.getLogger()
+
     metadata_file = open(input_directory + '/' + genome_id +
                          '/' + genome_id + '.PATRIC.spgene.tab')
     metadata = {}
+
+    log.info(('metdata file', input_directory + '/' + genome_id +
+              '/' + genome_id + '.PATRIC.spgene.tab'))
     for ix, i in enumerate(metadata_file):
 
         # identify keys
@@ -57,6 +70,9 @@ def subtract_genes(input_directory, genome_id, output_file, property, extend):
 
         if property in item['property']:
             metadata.update({item['patric_id']: item})
+
+    log.info(('loading features file', input_directory + '/' +
+              genome_id + '/' + genome_id + '.PATRIC.features.tab'))
 
     features = []
     for ix, i in enumerate(open(input_directory + '/' + genome_id + '/' + genome_id + '.PATRIC.features.tab')):
@@ -75,6 +91,8 @@ def subtract_genes(input_directory, genome_id, output_file, property, extend):
         except Exception as e:
             pass
 
+    log.debug(('fetures: ', features))
+
     genomes = {}
     for i in features:
         try:
@@ -82,33 +100,47 @@ def subtract_genes(input_directory, genome_id, output_file, property, extend):
         except Exception as e:
             genomes[i['accession']] = [i]
 
-    fofasta = open(output_file+'.fasta', 'w')
-    # Now: traverse the selected genes and retrieve the sequences
-    for record in SeqIO.parse(open(input_directory + '/' + genome_id + '/' + genome_id + '.fna'), "fasta"):
-        genome_id = record.id
-        genome_data = genomes[genome_id]
-        sequence = record.seq
+    log.debug(('identified genomes', genomes))
 
-        intervals = []
-        for genome in genome_data:
-            start = min(int(genome['start']), int(genome['end']))
-            end = max(int(genome['start']), int(genome['end']))
-            if start - extend > 0:
-                start = start - extend
-            if len(sequence) - extend > 0:
-                end = end + extend
+    if not faa:
+        fofasta = open(output_file+'.fasta', 'w')
+        # Now: traverse the selected genes and retrieve the sequences
+        for record in SeqIO.parse(open(input_directory + '/' + genome_id + '/' + genome_id + '.fna'), "fasta"):
+            genome_id = record.id
 
-            header = genome['patric_id']+'|'+genome['start']+'|'+genome['end']
-            intervals.append([start, end, [header]])
+            log.debug(('processing genome', genome_id))
 
-        intervals = overlap(intervals)
+            genome_data = genomes[genome_id]
+            sequence = record.seq
 
-        for interval in intervals:
-            header = "|".join(
-                [">"+genome['genome_id'], genome['accession'], 'start:'+str(interval[0]), 'end:'+str(interval[1]), "["+",".join(interval[2]) + "]"])
-            _sequence = sequence[int(interval[0]):int(interval[1])]
-            fofasta.write(header+'\n'+str(_sequence)+'\n')
+            intervals = []
+            for genome in genome_data:
+                log.debug(('Procesing entry:', genome))
+                start = min(int(genome['start']), int(genome['end']))
+                end = max(int(genome['start']), int(genome['end']))
+                if start - extend > 0:
+                    start = start - extend
+                if len(sequence) - extend > 0:
+                    end = end + extend
 
-    # print(overlap(intervals))
+                header = genome['patric_id']+'|' + \
+                    genome['start']+'|'+genome['end']
+                intervals.append([start, end, [header]])
 
-    json.dump([genomes, metadata], open(output_file+'.json', 'w'))
+            intervals = overlap(intervals)
+
+            for interval in intervals:
+                header = "|".join(
+                    [">"+genome['genome_id'], genome['accession'], 'start:'+str(interval[0]), 'end:'+str(interval[1]), "["+",".join(interval[2]) + "]"])
+                _sequence = sequence[int(interval[0]):int(interval[1])]
+                fofasta.write(header+'\n'+str(_sequence)+'\n')
+
+        # print(overlap(intervals))
+
+        json.dump([genomes, metadata], open(output_file + '.json', 'w'))
+
+    else:
+        fofasta = open(output_file + '.fasta', 'w')
+        genome_data = genomes
+        for record in SeqIO.parse(open(input_directory + '/' + genome_id + '/' + genome_id + '.PATRIC.faa'), "fasta"):
+            pass
