@@ -169,6 +169,6 @@ def subtract_genes(input_directory, genome_id, output_file, property, extend, fa
                 if len(sequence) < 200:
                     continue
 
-                fofasta.write(header+'\n'+sequence+'\n')
+                fofasta.write(">"+header+'\n'+sequence+'\n')
             except:
                 pass
