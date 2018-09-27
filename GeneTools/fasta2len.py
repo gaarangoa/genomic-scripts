@@ -1,11 +1,18 @@
 import sys
 from Bio import SeqIO
+import click
 
 
-fi=sys.argv[1] # fastafile from besthit
-sep = sys.argv[2] # separator to get only sequence id
+@click.command()
+@click.option('--fasta-file', required=True, help='fasta input file')
+@click.option('--separator', default="|", help='header separator [default: "|" ]')
+def fasta2len(fasta_file, separator):
+    '''
 
-for record in SeqIO.parse(open(fi), "fasta"):
-    id = record.id.split(sep)[0]
-    print(id+"\t"+str(len(record.seq)))
+    Get the lengths of each sequence in a fasta file.
 
+    '''
+
+    for record in SeqIO.parse(open(fasta_file), "fasta"):
+        id = record.id.split(separator)[0]
+        print(id+"\t"+str(len(record.seq)))

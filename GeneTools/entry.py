@@ -13,6 +13,7 @@ from GeneTools.split_fasta import split_fasta
 from GeneTools.fasta2kmers import fasta2kmers
 from GeneTools.fasta2trainKmers import fasta2trainKmers
 from GeneTools.fasta_filter_seq import fasta_filter_seq
+from GeneTools.fasta2len import fasta2len
 
 
 @click.group()
@@ -41,3 +42,4 @@ cli.add_command(split_fasta)
 cli.add_command(fasta2kmers)
 cli.add_command(fasta_filter_seq)
 cli.add_command(fasta2trainKmers)
+cli.add_command(fasta2len)
