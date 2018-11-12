@@ -1,6 +1,7 @@
 import click
 from GeneTools.mutate import mutate
 from GeneTools.patric.patric import patric
+from GeneTools.metastorm.metastorm import metastorm
 from GeneTools.fasta2rand import fasta2rand
 from GeneTools.FilterFastaLength import FilterFastaLength
 from GeneTools.filterTaxa import filter_taxa
@@ -43,3 +44,4 @@ cli.add_command(fasta2kmers)
 cli.add_command(fasta_filter_seq)
 cli.add_command(fasta2trainKmers)
 cli.add_command(fasta2len)
+cli.add_command(metastorm)
