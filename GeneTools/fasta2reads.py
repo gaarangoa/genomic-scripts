@@ -35,4 +35,4 @@ def fasta2reads(fasta, read_length, min_sread, max_sread):
             random_position = random.randint(
                 0, len(record.seq) - read_length-1)
             read_sequence = record.seq[random_position:random_position + read_length]
-            fo.write(">"record.id+'|'+str(iread)+'\n'+str(read_sequence)+'\n')
+            fo.write(">"+record.id+'|'+str(iread)+'\n'+str(read_sequence)+'\n')
