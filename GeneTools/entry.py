@@ -16,6 +16,7 @@ from GeneTools.fasta2trainKmers import fasta2trainKmers
 from GeneTools.fasta_filter_seq import fasta_filter_seq
 from GeneTools.fasta2len import fasta2len
 from GeneTools.fasta2reads import fasta2reads
+from GeneTools.nanoarg.nanoarg import nanoarg
 
 
 @click.group()
@@ -46,4 +47,5 @@ cli.add_command(fasta_filter_seq)
 cli.add_command(fasta2trainKmers)
 cli.add_command(fasta2len)
 cli.add_command(metastorm)
+cli.add_command(nanoarg)
 cli.add_command(fasta2reads)

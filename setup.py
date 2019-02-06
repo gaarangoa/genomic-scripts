@@ -10,7 +10,8 @@ setup(
         'BioPython',
         'ete3',
         'h5py',
-        'tqdm'
+        'tqdm',
+        'pandas'
     ],
     entry_points='''
         [console_scripts]
