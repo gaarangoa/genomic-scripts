@@ -7,8 +7,8 @@ import click
 @click.option('--fasta-file', required=True, help='fasta input file')
 @click.option('--separator', default="|", help='header separator [default: "|" ]')
 @click.option('--label-postition', default=0, help='label position [default: 0 ]')
-@click.option('--average-length', default=False, help='sequences with same label get the average length')
-def fasta2len(fasta_file, separator):
+
+def fasta2len(fasta_file, separator, label_position):
     '''
 
     Get the lengths of each sequence in a fasta file.
