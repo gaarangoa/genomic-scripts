@@ -10,7 +10,8 @@ import pandas as pd
 @click.option('--sample-names', required=True, help='sample names separated by comma')
 @click.option('--output-file', required=True, help='output table')
 @click.option('--counts', is_flag=True, default=False, help="report table with counts instead of 16s normalized [default False]")
-def deeparg_table(deeparg_files, sample_names, output_file, counts):
+@click.option('--header', is_flag=True, default=True, help="First line of the file is the file header [default True]")
+def deeparg_table(deeparg_files, sample_names, output_file, counts, header):
     '''
 
     From the deepARG resutls build a table for analysis.
@@ -43,7 +44,7 @@ def deeparg_table(deeparg_files, sample_names, output_file, counts):
     abundance_dict = {}
     for deeparg_file, sample_name in metadata:
         for ix, item in enumerate(open(deeparg_file)):
-            if ix == 0: continue
+            if ix == 0 and header: continue
             arg_id = item.split()[0]
             try:
                 assert(abundance_dict[arg_id])
