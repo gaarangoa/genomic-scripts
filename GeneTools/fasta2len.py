@@ -18,7 +18,7 @@ def fasta2len(fasta_file, separator, label_position):
     '''
     data = {}
     for record in SeqIO.parse(open(fasta_file), "fasta"):
-        id = record.id.split(separator)[0]
+        id = record.id.split(separator)[label_position]
         try:
             data[id]+=len(record.seq)
         except Exception as e:
