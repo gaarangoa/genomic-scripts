@@ -87,7 +87,7 @@ def mutate(input_file, insertions, deletions, mismatches, mutations, max_indel_s
         exit()
 
     fo = open(input_file+'.M'+str(mutations)+'.m'+str(mismatches)+'.i' +
-              str(insertions)+'.d'+str(deletions)+'.prefix-'+prefix+'.mut.fa', 'w')
+              str(insertions)+'.d'+str(deletions)+'.prefix-'+prefix+'.mut.fasta', 'w')
 
     # mutations are 2x
     mutations = int(mutations/2)

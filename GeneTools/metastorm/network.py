@@ -10,7 +10,7 @@ def get_scaffolds(path='', database='', sample_name='', scaffolds={}, evalue=1e-
     data = data[data['evalue'] <= evalue]
     data = data[data['identity'] >= identity]
     data = data[data['bitscore'] >= bitscore]
-    print(f'{database} Hits {len(data)}')
+    print('{} Hits {}'.format(database, len(data)))
     for ix, i in data.iterrows():
         scaffold_id = sample_name+"_.*._"+i['query'].split('_')[1]
         subject = database+"_.*._"+str(i['subject'])
