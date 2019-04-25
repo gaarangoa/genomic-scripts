@@ -74,7 +74,7 @@ def network(metadata, output_file, tsv):
                 except:
                     edges[(k, i[il])] = 1
 
-    fo = open(f'{output_file}.nodes.csv', 'w')
+    fo = open('{}.nodes.csv'.format(output_file), 'w')
     fo.write('Node,Database,Weight\n')
     for i in nodes:
         database, gene = i.split('_.*._')
@@ -82,7 +82,7 @@ def network(metadata, output_file, tsv):
 
     fo.close()
 
-    fo = open(f'{output_file}.edges.csv', 'w')
+    fo = open('{}.edges.csv'.format(output_file), 'w')
     fo.write('Source,Target,source_database,target_database,Weight\n')
     for i in edges:
         s_database, s_gene = i[0].split('_.*._')
