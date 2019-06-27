@@ -116,6 +116,7 @@ def mapping_table(input_file, output_file):
         'NCBI_taxa_id',
         'taxa_centrifuge_score',
         'species',
+        'coverage',
         'is_pathogen'
         ]
     ]
