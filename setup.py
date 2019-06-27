@@ -11,7 +11,8 @@ setup(
         'ete3',
         'h5py',
         'tqdm',
-        'pandas'
+        'pandas',
+        'networkx'
     ],
     entry_points='''
         [console_scripts]

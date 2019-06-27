@@ -32,7 +32,10 @@ def deeparg_abundance(deeparg, lfile, ncounts, nlength, rlength, output_file, gf
     )
     log = logging.getLogger()
 
-    arg_size = {i.split()[0].split("|")[-1].upper(): i.split() for i in open(lfile)}
+    # arg_size = {i.split()[0].split("|")[-1].upper(): i.split() for i in open(lfile)}
+    arg_size = {i.split()[0].split("|")[2].upper(): i.split() for i in open(lfile)}
+    arg_size.update({i.split()[0].split("|")[-1].upper(): i.split() for i in open(lfile)})
+
     arg_counts = {}
     arg_category = {}
     log.info('counting args in file')
@@ -60,7 +63,7 @@ def deeparg_abundance(deeparg, lfile, ncounts, nlength, rlength, output_file, gf
         arg_like_reads = arg_counts[arg]
         arg_length = int(arg_size[arg][1])
 
-        rel_abundance = (arg_like_reads*rlength/arg_length)/(ncounts*rlength/nlength)
+        rel_abundance = (arg_like_reads*rlength/arg_length)/float(ncounts*rlength/nlength)
         # log.debug( (arg, arg_counts[arg], rel_abundance) )
 
         fo1.write("\t".join([arg, str(arg_counts[arg]), str(rel_abundance)]) + "\n")
